@@ -17,10 +17,13 @@ def main():
     filter.add_coefficients(coeff_bandstop)
     filter.synthesis()
 
-    new_signal = np.zeros(len(ecg_signal))
+    new_signal = np.zeros(len(ecg_signal)+filter.coefficients_length-1)
 
-    for i in range(0, len(ecg_signal)):
-        new_signal[i] = filter.dofilter(ecg_signal[i])
+    for i in range(0, len(ecg_signal)+filter.coefficients_length-1):
+        if i < len(ecg_signal):
+            new_signal[i] = filter.dofilter(ecg_signal[i])
+        else:
+            new_signal[i] = filter.dofilter(0)
 
     time = np.arange(0, len(new_signal)) / 1000
     plt.plot(time, new_signal)

@@ -44,7 +44,8 @@ class FIRFilter:
         # List can contain many lists with different length
         self.coefficients_list = [_coefficients]
         self.real_coefficients = _coefficients
-        self.buffer = np.zeros(len(self.real_coefficients))
+        self.coefficients_length = len(self.real_coefficients)
+        self.buffer = np.zeros(self.coefficients_length)
 
     def add_coefficients(self, _coefficients:list):
         self.coefficients_list.append(_coefficients)
@@ -57,7 +58,8 @@ class FIRFilter:
         for coeff in self.coefficients_list[1::]:
             tmp = self.convolution(coeff, tmp)
         self.real_coefficients = tmp
-        self.buffer = np.zeros(len(self.real_coefficients))
+        self.coefficients_length = len(self.real_coefficients)
+        self.buffer = np.zeros(self.coefficients_length)
 
 
     def convolution(self, x_1:list, x_2:list):
