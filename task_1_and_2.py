@@ -27,7 +27,7 @@ def main():
 
     time = np.arange(0, len(new_signal)) / 1000
     plt.plot(time, new_signal)
-    plt.savefig("./figures.jpeg")
+    plt.savefig("figures/new_ECG_signal.jpeg")
 
 
 if __name__ == "__main__":
